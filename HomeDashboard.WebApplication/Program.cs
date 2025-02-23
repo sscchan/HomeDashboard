@@ -20,7 +20,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IWasteBinsCollectionDateService, WasteBinsCollectionDateService>();
 builder.Services.AddScoped<IWasteBinCollectionDateQueryService, UnleyCouncilOnlineWasteBinCollectionDateQueryService>();
-    
+builder.Services.AddScoped<IWeatherForecastService, BOMSevenDaysWeatherForecastService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
