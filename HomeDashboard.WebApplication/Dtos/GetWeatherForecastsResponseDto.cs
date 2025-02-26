@@ -5,26 +5,37 @@ namespace HomeDashboard.WebApplication.Dtos;
 public class GetWeatherForecastsResponseDto
 {
     [Required]
-    public string Day { get; set; }
+    public DateTime DateTime { get; set; }
+    
+    [Required]
+    public string DeicticTime { get; set; }
     
     [Required]
     public string WeatherDescription { get; set; }
     
     [Required]
-    public string RainDescription { get; set; }
+    public float RainProbabilityPercentage { get; set; }
     
     [Required]
-    public string MinimumTemperature { get; set; }
-    
-    [Required]
-    public string MaximumTemperature { get; set; }
+    public float MinimumRainfall { get; set; }
 
-    public GetWeatherForecastsResponseDto(string day, string weatherDescription, string rainDescription,
-        string minimumTemperature, string maximumTemperature)
+    [Required]
+    public float MaximumRainfall { get; set; }
+    
+    [Required]
+    public float MinimumTemperature { get; set; }
+    
+    [Required]
+    public float MaximumTemperature { get; set; }
+
+    public GetWeatherForecastsResponseDto(DateTime dateTime, string deicticTime, string weatherDescription, float rainProbabilityPercentage, float minimumRainfall, float maximumRainfall, float minimumTemperature, float maximumTemperature)
     {
-        Day = day;
+        DateTime = dateTime;
+        DeicticTime = deicticTime;
         WeatherDescription = weatherDescription;
-        RainDescription = rainDescription;
+        RainProbabilityPercentage = rainProbabilityPercentage;
+        MinimumRainfall = minimumRainfall;
+        MaximumRainfall = maximumRainfall;
         MinimumTemperature = minimumTemperature;
         MaximumTemperature = maximumTemperature;
     }

@@ -26,7 +26,29 @@ public class WeatherController
         var weatherForecasts = await _weatherForecastService.GetForecast();
 
         return weatherForecasts
-            .Select(wf => new GetWeatherForecastsResponseDto(wf.Day, wf.WeatherDescription, wf.RainDescription, wf.MinimumTemperature, wf.MaximumTemperature))
+            .Select(wf =>
+            {
+                var deicticTime = (wf.DateTime.DayOfWeek).ToString();
+                
+                if (DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1)).Equals(DateOnly.FromDateTime(wf.DateTime)))
+                {
+                    deicticTime = "Yesterday";
+                }
+                else if (DateOnly.FromDateTime(DateTime.UtcNow).Equals(DateOnly.FromDateTime(wf.DateTime)))
+                {
+                    deicticTime = "Rest of Today";
+                }
+                else if (DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).Equals(DateOnly.FromDateTime(wf.DateTime)))
+                {
+                    deicticTime = "Tomorrow";
+                }
+                    
+                return new GetWeatherForecastsResponseDto(
+                    wf.DateTime, deicticTime, 
+                    wf.WeatherDescription, 
+                    wf.RainProbabilityPercentage, wf.MinimumRainfall, wf.MaximumRainfall,
+                    wf.MinimumTemperature, wf.MaximumTemperature);
+            })
             .ToList();
     }
 }

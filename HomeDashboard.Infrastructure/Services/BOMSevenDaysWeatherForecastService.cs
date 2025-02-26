@@ -35,7 +35,8 @@ public class BOMSevenDaysWeatherForecastService : IWeatherForecastService
         
         return getBomSevenDaysWeatherForecastApiResponse.fcst.daily.Select((df, index) =>
         {
-            var day = DateOnly.FromDateTime(df.date_utc).ToString();
+            var dateTime = df.date_utc;
+            dateTime = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
             var weatherDescription = weatherForecastDateWeatherDescriptionTextMap.GetValueOrDefault(DateOnly.FromDateTime(df.date_utc));
 
             var rainfallDistribution = new[]
@@ -46,14 +47,13 @@ public class BOMSevenDaysWeatherForecastService : IWeatherForecastService
                 df.atm.surf_air.precip.exceeding_75percentchance_total_mm,
             };
 
+            var rainProbabilityPercentage = df.atm.surf_air.precip.any_probability_percent;
             var minRainfall = rainfallDistribution.Min();
             var maxRainfall = rainfallDistribution.Max();
+            var minimumTemperature = df.atm.surf_air.temp_min_cel;
+            var maximumTemperature = df.atm.surf_air.temp_max_cel;
             
-            var rainDescription = $"{df.atm.surf_air.precip.any_probability_percent:0}% of {minRainfall:0.##} to {maxRainfall:0.0#} mm";
-            var minimumTemperature = $"{df.atm.surf_air.temp_min_cel:0}";
-            var maximumTemperature = $"{df.atm.surf_air.temp_max_cel:0}";;
-            
-            return new WeatherForecast(day, weatherDescription, rainDescription, minimumTemperature, maximumTemperature);
+            return new WeatherForecast(dateTime, weatherDescription, rainProbabilityPercentage, minRainfall, maxRainfall, minimumTemperature, maximumTemperature);
         }).ToList();
     }
 }
