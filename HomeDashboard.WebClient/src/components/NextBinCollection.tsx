@@ -15,11 +15,10 @@ function NextBinCollection()
 
         let ignore = false;
         fetchNextBinCollection();
-
         return () => {
             ignore = true;
         };
-    }, [nextBinCollection]); 
+    }, []); 
 
     if (nextBinCollection == '')
     {

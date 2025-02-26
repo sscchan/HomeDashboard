@@ -49,6 +49,7 @@ public class WeatherController
                     wf.RainProbabilityPercentage, wf.MinimumRainfall, wf.MaximumRainfall,
                     wf.MinimumTemperature, wf.MaximumTemperature);
             })
+            .Where(wf => wf.DeicticTime != "Yesterday")
             .ToList();
     }
 }

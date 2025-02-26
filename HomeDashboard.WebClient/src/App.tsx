@@ -1,5 +1,7 @@
 import './App.css'
+import Clock from './components/Clock'
 import NextBinCollection from './components/NextBinCollection'
+import WeatherForecasts from './components/WeatherForecasts'
 
 function App() {
 
@@ -7,6 +9,8 @@ function App() {
     <>
       <div>
         <NextBinCollection />
+        <Clock />
+        <WeatherForecasts />
       </div>
     </>
   )
