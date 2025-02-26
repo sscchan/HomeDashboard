@@ -8,7 +8,7 @@ namespace HomeDashboard.WebApplication.Controllers;
 [Route("api/WasteBins")]
 public class WasteBinController
 {
-    private IWasteBinsCollectionDateService _wasteBinCollectionDateService;
+    private readonly IWasteBinsCollectionDateService _wasteBinCollectionDateService;
 
     public WasteBinController(IWasteBinsCollectionDateService wasteBinCollectionDateService)
     {
@@ -16,17 +16,14 @@ public class WasteBinController
     }
     
     /// <summary>
-    /// Retrieves information related to Waste Bins
+    /// Retrieves the name of the next non-general waste bin to be collected.
     /// </summary>
     [HttpGet]
-    [ProducesResponseType(typeof(IList<GetWasteBinResponseDto>), 200)]
+    [Route("next")]
+    [ProducesResponseType(typeof(string), 200)]
     [ProducesResponseType(500)]
-    public async Task<IList<GetWasteBinResponseDto>> Index()
+    public async Task<string> GetNextNonWasteBinCollection()
     {
-        var nextWasteBinCollectionDates = await _wasteBinCollectionDateService.GetNextWasteBinCollectionDates();
-
-        return nextWasteBinCollectionDates
-            .Select(nwbcd => new GetWasteBinResponseDto(nwbcd.BinName, nwbcd.CollectionDate))
-            .ToList();
+        return await _wasteBinCollectionDateService.GetNextNonWasteBinCollection();
     }
 }

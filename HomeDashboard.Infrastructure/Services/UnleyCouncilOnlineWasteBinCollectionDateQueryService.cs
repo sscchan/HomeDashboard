@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net.Http.Json;
 using AngleSharp.Html.Parser;
 using HomeDashboard.Application.Entities;
@@ -27,21 +28,37 @@ public class UnleyCouncilOnlineWasteBinCollectionDateQueryService : IWasteBinCol
             var parser = new HtmlParser();
             var document = parser.ParseDocument(getUnleyCouncilWasteBinCollectionDateResponse.responseContent);
             
+            TimeZoneInfo timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Australia/Adelaide");
+            
             var nextGeneralWasteCollectionDateString= document.Body
                 .QuerySelector("div.waste-services-result.general-waste")
                 .QuerySelector("div.next-service").TextContent.Trim();
-            var nextGreenWasteCollectionDateString = document.Body
+            var nextGeneralWasteCollectionDateTime = DateTime.ParseExact(
+                nextGeneralWasteCollectionDateString, "ddd d/M/yyyy", CultureInfo.InvariantCulture);
+            var nextGeneralWasteCollectionDateTimeUtc =
+                TimeZoneInfo.ConvertTimeToUtc(nextGeneralWasteCollectionDateTime, timeZoneInfo);
+            
+            var nextOrganicWasteCollectionDateString = document.Body
                 .QuerySelector("div.waste-services-result.green-waste")
                 .QuerySelector("div.next-service").TextContent.Trim();
+            var nextOrganicWasteCollectionDateTime = DateTime.ParseExact(
+                nextOrganicWasteCollectionDateString, "ddd d/M/yyyy", CultureInfo.InvariantCulture);
+            var nextOrganicWasteCollectionDateTimeUtc =
+                TimeZoneInfo.ConvertTimeToUtc(nextOrganicWasteCollectionDateTime, timeZoneInfo);
+            
             var nextRecyclingCollectionDateString = document.Body
                 .QuerySelector("div.waste-services-result.recycling")
                 .QuerySelector("div.next-service").TextContent.Trim();
+            var nextRecyclingCollectionDateTime = DateTime.ParseExact(
+                nextRecyclingCollectionDateString, "ddd d/M/yyyy", CultureInfo.InvariantCulture);
+            var nextRecyclingCollectionDateTimeUtc =
+                TimeZoneInfo.ConvertTimeToUtc(nextRecyclingCollectionDateTime, timeZoneInfo);
             
             return new List<WasteBinCollectionDate>()
             {
-                new WasteBinCollectionDate("General Waste (Blue)", DateOnly.ParseExact(nextGeneralWasteCollectionDateString, "ddd d/M/yyyy")),
-                new WasteBinCollectionDate("Organic Waste (Green)", DateOnly.ParseExact(nextGreenWasteCollectionDateString, "ddd d/M/yyyy")),
-                new WasteBinCollectionDate("Recycling (Yellow)", DateOnly.ParseExact(nextRecyclingCollectionDateString, "ddd d/M/yyyy"))
+                new WasteBinCollectionDate(WasteBin.BLUE_GENERAL_WASTE, nextGeneralWasteCollectionDateTimeUtc),
+                new WasteBinCollectionDate(WasteBin.GREEN_ORGANIC_WASTE, nextOrganicWasteCollectionDateTimeUtc),
+                new WasteBinCollectionDate(WasteBin.YELLOW_RECYCLE, nextRecyclingCollectionDateTime)
             };
         }
 

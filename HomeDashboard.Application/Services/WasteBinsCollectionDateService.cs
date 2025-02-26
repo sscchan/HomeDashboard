@@ -5,16 +5,21 @@ namespace HomeDashboard.Application.Services;
 
 public class WasteBinsCollectionDateService : IWasteBinsCollectionDateService
 {
-    
     private IWasteBinCollectionDateQueryService _wasteBinCollectionDateQueryService;
 
     public WasteBinsCollectionDateService(IWasteBinCollectionDateQueryService wasteBinCollectionDateQueryService)
     {
         _wasteBinCollectionDateQueryService = wasteBinCollectionDateQueryService;
     }
-    
-    public async Task<IList<WasteBinCollectionDate>> GetNextWasteBinCollectionDates()
+    public async Task<string> GetNextNonWasteBinCollection()
     {
-        return await _wasteBinCollectionDateQueryService.GetNextWasteBinCollectionDates();
+        var binCollectionDates =  await _wasteBinCollectionDateQueryService.GetNextWasteBinCollectionDates();
+        //TODO: Refactor to use TimeProvider
+        var nextNonGeneralWasteBinCollected = binCollectionDates
+            .Where(bcd => bcd.BinName != WasteBin.BLUE_GENERAL_WASTE)
+            .MinBy(bcd => bcd.CollectionDate)
+            .BinName;
+
+        return nextNonGeneralWasteBinCollected;
     }
 }
