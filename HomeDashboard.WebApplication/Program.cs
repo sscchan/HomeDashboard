@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlFilePath);
 });
 
-// Configure DI\
+// Configure DI
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IWasteBinsCollectionDateService, WasteBinsCollectionDateService>();
 builder.Services.AddScoped<IWasteBinCollectionDateQueryService, UnleyCouncilOnlineWasteBinCollectionDateQueryService>();
@@ -29,6 +29,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 //app.UseHttpsRedirection();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.MapControllers();
+
 
 app.Run();
