@@ -24,8 +24,7 @@ function NextBinCollection()
     {
         return (
             <div>
-                Bin Stuff
-                {nextBinCollection}
+                Loading Next Bin Collection
             </div>
         )
     }
@@ -33,7 +32,7 @@ function NextBinCollection()
     {
         return (
             <div>
-                <img src={`./images/${nextBinCollection}.jpg`} width="20%" />
+                <img src={`./images/${nextBinCollection}.jpg`} width="125px" />
             </div>
         )
     }

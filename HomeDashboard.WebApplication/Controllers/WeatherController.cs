@@ -36,7 +36,7 @@ public class WeatherController
                 }
                 else if (DateOnly.FromDateTime(DateTime.UtcNow).Equals(DateOnly.FromDateTime(wf.DateTime)))
                 {
-                    deicticTime = "Rest of Today";
+                    deicticTime = "Today";
                 }
                 else if (DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).Equals(DateOnly.FromDateTime(wf.DateTime)))
                 {

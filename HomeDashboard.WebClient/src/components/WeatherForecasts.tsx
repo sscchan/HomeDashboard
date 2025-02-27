@@ -41,24 +41,27 @@ function WeatherForecasts()
     }
     else
     {
+        const tdStyle = {
+            fontSize: '2.5vw'
+        }
         var weatherForecastDataRows = weatherForecasts.map(wf =>
             <tr key={wf.deicticTime}>
-                <td>{wf.deicticTime}</td>
-                <td>{wf.weatherDescription}</td>
-                <td>{wf.rainProbabilityPercentage}% of {wf.minimumRainfall}-{wf.maximumRainfall}mm</td>
-                <td>{wf.minimumTemperature}°C</td>
-                <td>{wf.maximumTemperature}°C</td>
+                <td style={tdStyle} align="left">{wf.deicticTime}</td>
+                <td style={tdStyle} align="left">{wf.weatherDescription}</td>
+                <td style={tdStyle} align="left">{wf.rainProbabilityPercentage}% of {wf.minimumRainfall}-{wf.maximumRainfall}mm</td>
+                <td style={tdStyle} align="left">{wf.minimumTemperature.toFixed(1)}°C</td>
+                <td style={tdStyle} align="left">{wf.maximumTemperature.toFixed(1)}°C</td>
             </tr>
         );
         return (
-            <table>
+            <table width="100%">
                 <tbody>
                     <tr>
-                        <th>Day</th>
-                        <th>Weather</th>
-                        <th>Rainfall</th>
-                        <th>Min</th>
-                        <th>Max</th>
+                        <th align="left"></th>
+                        <th align="left"></th>
+                        <th style={tdStyle} align="left">Rainfall</th>
+                        <th style={tdStyle} align="left">Min</th>
+                        <th style={tdStyle} align="left">Max</th>
                     </tr>
                     {weatherForecastDataRows}
                 </tbody>

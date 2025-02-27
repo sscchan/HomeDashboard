@@ -11,11 +11,13 @@ function Clock()
         }
     });
 
+    const clockStyle = {
+        fontSize: '9vw'
+    }
     return(
-        <div>
-            <p> Time : {date.getHours()}:{date.getMinutes()}</p>
-            <p> Date : {date.getDate()}/{date.getMonth() + 1}</p>
-
+        <div style={clockStyle}>
+            {date.getDate()}/{date.getMonth() + 1} &nbsp;&nbsp; 
+            {date.getHours().toString().padStart(2,'0')}:{date.getMinutes().toString().padStart(2,'0')}
         </div>
     )
 }
