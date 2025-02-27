@@ -8,11 +8,27 @@ namespace HomeDashboard.WebApplication.Controllers;
 [Route("api/Weather")]
 public class WeatherController
 {
+    private readonly IWeatherObservationService _weatherObservationService;
     private readonly IWeatherForecastService _weatherForecastService;
-
-    public WeatherController(IWeatherForecastService weatherForecastService)
+    
+    public WeatherController(IWeatherObservationService weatherObservationService, IWeatherForecastService weatherForecastService)
     {
+        _weatherObservationService = weatherObservationService;
         _weatherForecastService = weatherForecastService;
+    }
+    
+    /// <summary>
+    /// Retrieves daily weather forecasts
+    /// </summary>
+    [HttpGet]
+    [Route("Observations/Latest")]
+    [ProducesResponseType(typeof(GetWeatherObservationResponseDto), 200)]
+    [ProducesResponseType(500)]
+    public async Task<GetWeatherObservationResponseDto> GetWeatherObservation()
+    {
+        var weatherObservation = await _weatherObservationService.GetWeatherObservation();
+        return new GetWeatherObservationResponseDto(weatherObservation.ObservationDate,
+            weatherObservation.DryBulbTemperature, weatherObservation.ApparentTemperature);
     }
     
     /// <summary>

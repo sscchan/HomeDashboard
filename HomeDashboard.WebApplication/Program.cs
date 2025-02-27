@@ -21,6 +21,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IWasteBinsCollectionDateService, WasteBinsCollectionDateService>();
 builder.Services.AddScoped<IWasteBinCollectionDateQueryService, UnleyCouncilOnlineWasteBinCollectionDateQueryService>();
 builder.Services.AddScoped<IWeatherForecastService, BOMSevenDaysWeatherForecastService>();
+builder.Services.AddScoped<IWeatherObservationService, BOMWeatherObservationService>();
 
 var app = builder.Build();
 

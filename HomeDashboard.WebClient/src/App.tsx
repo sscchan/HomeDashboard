@@ -2,6 +2,7 @@ import './App.css'
 import Clock from './components/Clock'
 import NextBinCollection from './components/NextBinCollection'
 import WeatherForecasts from './components/WeatherForecasts'
+import WeatherObservation from './components/WeatherObservation';
 
 function App() {
 
@@ -16,11 +17,14 @@ function App() {
       <table style={tableStyle}>
         <tbody>
           <tr>
-            <td width="25%">
+            <td width="15%">
               <NextBinCollection />
             </td>
-            <td width="75%">
+            <td width="50%">
               <Clock />
+            </td>
+            <td width="35%">
+              <WeatherObservation />
             </td>
           </tr>
         </tbody>
