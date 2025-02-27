@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface WeatherApiResponse {
+interface WeatherForecastApiResponse {
     dateTime: Date;
     deicticTime: string;
     weatherDescription: string;
@@ -13,13 +13,13 @@ interface WeatherApiResponse {
 
 function WeatherForecasts() 
 {
-    const [weatherForecasts, setWeatherForecasts] = useState<Array<WeatherApiResponse>>([]);
+    const [weatherForecasts, setWeatherForecasts] = useState<Array<WeatherForecastApiResponse>>([]);
 
     useEffect(() => {
         async function fetchWeatherForecasts() {
-            const response = await fetch("/api/Weather");
+            const response = await fetch("/api/Weather/Forecasts");
             if (!ignore) {
-                var weatherForecasts : Array<WeatherApiResponse> = await response.json();
+                var weatherForecasts : Array<WeatherForecastApiResponse> = await response.json();
                 setWeatherForecasts(weatherForecasts);
             }
         }

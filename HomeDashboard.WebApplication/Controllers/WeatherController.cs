@@ -19,9 +19,10 @@ public class WeatherController
     /// Retrieves daily weather forecasts
     /// </summary>
     [HttpGet]
+    [Route("Forecasts")]
     [ProducesResponseType(typeof(IList<GetWeatherForecastsResponseDto>), 200)]
     [ProducesResponseType(500)]
-    public async Task<IList<GetWeatherForecastsResponseDto>> Index()
+    public async Task<IList<GetWeatherForecastsResponseDto>> GetWeatherForecasts()
     {
         var weatherForecasts = await _weatherForecastService.GetForecast();
 
