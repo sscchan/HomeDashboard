@@ -49,8 +49,8 @@ function WeatherForecasts()
                 <td style={tdStyle} align="left">{wf.deicticTime}</td>
                 <td style={tdStyle} align="left">{wf.weatherDescription}</td>
                 <td style={tdStyle} align="left">{wf.rainProbabilityPercentage}% of {wf.minimumRainfall}-{wf.maximumRainfall}mm</td>
-                <td style={tdStyle} align="left">{wf.minimumTemperature.toFixed(1)}°C</td>
-                <td style={tdStyle} align="left">{wf.maximumTemperature.toFixed(1)}°C</td>
+                <td style={tdStyle} align="left">{wf.minimumTemperature.toFixed(1)}°</td>
+                <td style={tdStyle} align="left">{wf.maximumTemperature.toFixed(1)}°</td>
             </tr>
         );
         return (

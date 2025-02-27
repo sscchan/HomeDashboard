@@ -30,9 +30,13 @@ function NextBinCollection()
     }
     else
     {
+        const imgStyle = {
+            width: "12vw"
+        }
+
         return (
             <div>
-                <img src={`./images/${nextBinCollection}.jpg`} width="125px" />
+                <img src={`./images/${nextBinCollection}.jpg`} style={imgStyle} />
             </div>
         )
     }

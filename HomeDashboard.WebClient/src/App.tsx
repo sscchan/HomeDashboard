@@ -8,6 +8,7 @@ function App() {
 
   const tableStyle = {
     'table-layout': 'fixed',
+    'vertical-align': 'middle',
     width: '100%'
   };
 
