@@ -8,22 +8,24 @@ interface WeatherObservationApiResponse {
 
 function WeatherObservation() 
 {
+    const DATA_FETCH_INTERVAL_IN_MINUTES : number = 10; 
     const [weatherObservations, setWeatherObservations] = useState<WeatherObservationApiResponse>();
 
     useEffect(() => {
         async function fetchWeatherObservation() {
             const response = await fetch("/api/Weather/Observations/Latest");
-            if (!ignore) {
-                var weatherObservations : WeatherObservationApiResponse = await response.json();
-                setWeatherObservations(weatherObservations);
-            }
+            var weatherObservations : WeatherObservationApiResponse = await response.json();
+            setWeatherObservations(weatherObservations);
         }
 
-        let ignore = false;
+        // Initial data population
         fetchWeatherObservation();
-        return () => {
-            ignore = true;
-        };
+
+        // Scheduled data refresh
+        var timer = setInterval(() => fetchWeatherObservation(), DATA_FETCH_INTERVAL_IN_MINUTES * 60 * 1000 )
+        return function cleanup() {
+            clearInterval(timer)
+        }
     }, []); 
 
     if (weatherObservations === null || weatherObservations === undefined)

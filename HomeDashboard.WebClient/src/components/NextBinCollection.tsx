@@ -2,22 +2,25 @@ import { useEffect, useState } from "react";
 
 function NextBinCollection() 
 {
+    const DATA_FETCH_INTERVAL_IN_HOURS : number = 4;
+
     const [nextBinCollection, setNextBinCollection] = useState('');
 
     useEffect(() => {
         async function fetchNextBinCollection() {
             const response = await fetch("/api/WasteBins/next")
-            if (!ignore) {
-                var nextBin = await response.text();
-                setNextBinCollection(nextBin);
-            }
+            var nextBin = await response.text();
+            setNextBinCollection(nextBin);
         }
 
-        let ignore = false;
+        // Initial data population
         fetchNextBinCollection();
-        return () => {
-            ignore = true;
-        };
+
+        // Scheduled data refresh
+        var timer = setInterval(() => fetchNextBinCollection(), DATA_FETCH_INTERVAL_IN_HOURS * 60 * 60 * 1000 )
+        return function cleanup() {
+            clearInterval(timer)
+        }
     }, []); 
 
     if (nextBinCollection == '')

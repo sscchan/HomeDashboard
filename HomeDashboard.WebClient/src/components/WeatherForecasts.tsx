@@ -13,22 +13,25 @@ interface WeatherForecastApiResponse {
 
 function WeatherForecasts() 
 {
+    const DATA_FETCH_INTERVAL_IN_HOURS : number = 1; 
+
     const [weatherForecasts, setWeatherForecasts] = useState<Array<WeatherForecastApiResponse>>([]);
 
     useEffect(() => {
         async function fetchWeatherForecasts() {
             const response = await fetch("/api/Weather/Forecasts");
-            if (!ignore) {
-                var weatherForecasts : Array<WeatherForecastApiResponse> = await response.json();
-                setWeatherForecasts(weatherForecasts);
-            }
+            var weatherForecasts : Array<WeatherForecastApiResponse> = await response.json();
+            setWeatherForecasts(weatherForecasts);
         }
 
-        let ignore = false;
+        // Initial data population
         fetchWeatherForecasts();
-        return () => {
-            ignore = true;
-        };
+
+        // Scheduled data refresh
+        var timer = setInterval(() => fetchWeatherForecasts(), DATA_FETCH_INTERVAL_IN_HOURS * 60 * 60 * 1000 )
+        return function cleanup() {
+            clearInterval(timer)
+        }
     }, []); 
 
     if (weatherForecasts.length === 0)
