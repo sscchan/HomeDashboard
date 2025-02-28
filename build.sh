@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build  -t homedashboard --file ./HomeDashboard.WebApplication/Dockerfile .
+docker build  -t sscchan/homedashboard --file ./HomeDashboard.WebApplication/Dockerfile .
