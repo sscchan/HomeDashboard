@@ -1,5 +1,4 @@
 using HomeDashboard.Application.Services;
-using HomeDashboard.WebApplication.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeDashboard.WebApplication.Controllers;

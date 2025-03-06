@@ -1,5 +1,6 @@
 import './App.css'
 import Clock from './components/Clock'
+import CompleteReloader from './components/CompleteReloader';
 import NextBinCollection from './components/NextBinCollection'
 import WeatherForecasts from './components/WeatherForecasts'
 import WeatherObservation from './components/WeatherObservation';
@@ -7,8 +8,8 @@ import WeatherObservation from './components/WeatherObservation';
 function App() {
 
   const tableStyle = {
-    'table-layout': 'fixed',
-    'vertical-align': 'middle',
+    tableLayout: 'fixed' as const,
+    verticalAlign: 'middle' as const,
     width: '100%'
   };
 
@@ -35,6 +36,11 @@ function App() {
           <tr>
             <td>
               <WeatherForecasts />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <CompleteReloader />
             </td>
           </tr>
         </tbody>
