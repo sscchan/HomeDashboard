@@ -5,7 +5,7 @@ interface StatusVersionResponse {
     deploymentDateTime: Date;
 }
 
-function CompleteReloader() 
+function DashboardReloader() 
 {
     const DATA_FETCH_INTERVAL_IN_MINUTES : number = 0.2; 
 
@@ -52,4 +52,4 @@ function CompleteReloader()
     )
 }
 
-export default CompleteReloader;
+export default DashboardReloader;

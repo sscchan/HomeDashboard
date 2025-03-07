@@ -1,9 +1,9 @@
 import './App.css'
 import Clock from './components/Clock'
-import CompleteReloader from './components/CompleteReloader';
+import DashboardReloader from './components/DashboardReloader';
 import NextBinCollection from './components/NextBinCollection'
-import WeatherForecasts from './components/WeatherForecasts'
-import WeatherObservation from './components/WeatherObservation';
+import Weather7DaysForecasts from './components/Weather7DaysForecasts'
+import TodayWeatherForecastAndObservation from './components/TodayWeatherForecastAndObservation';
 
 function App() {
 
@@ -26,21 +26,22 @@ function App() {
               <Clock />
             </td>
             <td width="35%">
-              <WeatherObservation />
+              <TodayWeatherForecastAndObservation />
             </td>
           </tr>
         </tbody>
       </table>
+      <br />
       <table style={tableStyle}>
         <tbody>
           <tr>
             <td>
-              <WeatherForecasts />
+              <Weather7DaysForecasts />
             </td>
           </tr>
           <tr>
             <td>
-              <CompleteReloader />
+              <DashboardReloader />
             </td>
           </tr>
         </tbody>

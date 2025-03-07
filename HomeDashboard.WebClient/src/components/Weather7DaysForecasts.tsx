@@ -11,7 +11,7 @@ interface WeatherForecastApiResponse {
     maximumTemperature: number;
 }
 
-function WeatherForecasts() 
+function Weather7DaysForecasts() 
 {
     const DATA_FETCH_INTERVAL_IN_HOURS : number = 1; 
 
@@ -73,4 +73,4 @@ function WeatherForecasts()
     }
 }
 
-export default WeatherForecasts;
+export default Weather7DaysForecasts;
