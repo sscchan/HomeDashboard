@@ -3,7 +3,7 @@ import Clock from './components/Clock'
 import DashboardReloader from './components/DashboardReloader';
 import NextBinCollection from './components/NextBinCollection'
 import Weather7DaysForecasts from './components/Weather7DaysForecasts'
-import TodayWeatherForecastAndObservation from './components/TodayWeatherForecastAndObservation';
+import SingleDayWeatherForecastAndObservation from './components/SingleDayWeatherForecastAndObservation';
 
 function App() {
 
@@ -26,7 +26,7 @@ function App() {
               <Clock />
             </td>
             <td width="35%">
-              <TodayWeatherForecastAndObservation />
+              <SingleDayWeatherForecastAndObservation />
             </td>
           </tr>
         </tbody>

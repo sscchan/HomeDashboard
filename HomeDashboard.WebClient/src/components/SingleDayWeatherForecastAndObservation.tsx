@@ -17,13 +17,13 @@ interface WeatherForecastApiResponse {
     maximumTemperature: number;
 }
 
-function TodayWeatherForecastAndObservation() 
+function SingleDayWeatherForecastAndObservation() 
 {
     const OBSERVATION_DATA_FETCH_INTERVAL_IN_MINUTES : number = 10; 
     const FORECAST_DATA_FETCH_INTERVAL_IN_HOURS : number = 1; 
 
     const [weatherObservations, setWeatherObservations] = useState<WeatherObservationApiResponse>();
-    const [todayWeatherForecast, setTodayWeatherForecast] = useState<WeatherForecastApiResponse>();
+    const [weatherForecast, setWeatherForecast] = useState<WeatherForecastApiResponse>();
 
     useEffect(() => {
         async function fetchWeatherObservation() {
@@ -47,7 +47,16 @@ function TodayWeatherForecastAndObservation()
                 const response = await fetch("/api/Weather/Forecasts");
                 var weatherForecasts : Array<WeatherForecastApiResponse> = await response.json();
                 
-                setTodayWeatherForecast(weatherForecasts.find(wf => wf.deicticTime === "Today"));
+                var currentHour = (new Date()).getHours();
+                // Display today's forecast before 2pm.
+                if (currentHour <= 14)
+                {
+                    setWeatherForecast(weatherForecasts.find(wf => wf.deicticTime === "Today"));
+                }
+                else
+                {
+                    setWeatherForecast(weatherForecasts.find(wf => wf.deicticTime === "Tomorrow"));
+                }
             }
     
             // Initial data population
@@ -89,12 +98,12 @@ function TodayWeatherForecastAndObservation()
                     <sup style={observationSupStyle}>currently&nbsp;&nbsp;</sup>{weatherObservations.dryBulbTemperature.toFixed(1)}°<br />
                 </div>
                 <div style={forecastDivStyle}>
-                    {todayWeatherForecast?.weatherDescription}<br />
-                    {todayWeatherForecast?.minimumTemperature.toFixed(1)}° - {todayWeatherForecast?.maximumTemperature.toFixed(1)}°
+                    <sup style={observationSupStyle}>{weatherForecast?.deicticTime.toLocaleLowerCase()}</sup> {weatherForecast?.weatherDescription}<br />
+                    {weatherForecast?.minimumTemperature.toFixed(1)}° - {weatherForecast?.maximumTemperature.toFixed(1)}°
                 </div>
             </>
         );
     }
 }
 
-export default TodayWeatherForecastAndObservation;
+export default SingleDayWeatherForecastAndObservation;
