@@ -19,13 +19,13 @@ function App() {
       <table style={tableStyle}>
         <tbody>
           <tr>
-            <td width="5%">
+            <td width="10%">
               <NextBinCollection />
             </td>
             <td width="50%">
               <Clock />
             </td>
-            <td width="50%">
+            <td width="40%">
               <SingleDayWeatherObservation />
             </td>
           </tr>
