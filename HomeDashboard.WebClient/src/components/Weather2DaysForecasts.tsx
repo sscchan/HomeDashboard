@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 interface WeatherForecastApiResponse {
     dateTime: Date;
     deicticTime: string;
+    weatherIconName: string;
     weatherDescription: string;
     rainProbabilityPercentage : number;
     minimumRainfall: number;
@@ -45,11 +46,15 @@ function Weather2DaysForecasts()
     else
     {
         const forecastStyle = {
-            fontSize: '8vw'
+            fontSize: '8vw',
+            verticalAlign: 'middle' as const
         }
-        
-        const forecastSupStyle = {
-            fontSize: '2vw'
+
+        const weatherIconStyle = {
+            width: '15vw',
+            position: "relative" as const,
+            top: "50%",
+            transform: 'translateY(30%)' as const
         }
 
         var todaysForecast = weatherForecasts.find(wf => wf.deicticTime === "Today");
@@ -61,16 +66,15 @@ function Weather2DaysForecasts()
                     <tr>
                         <td>
                             <div style={forecastStyle}>
-                                <sup style={forecastSupStyle}>{todaysForecast?.deicticTime} &nbsp;</sup>
-                                {todaysForecast?.minimumTemperature.toFixed(0)}°-{todaysForecast?.maximumTemperature.toFixed(0)}°<br></br>
+                                <img src={toIconImageUrl(todaysForecast ? todaysForecast?.weatherIconName : "")} style={weatherIconStyle} />
+                                {todaysForecast?.minimumTemperature.toFixed(0)}°-{todaysForecast?.maximumTemperature.toFixed(0)}° <br/>
                                 {todaysForecast ? Math.round(todaysForecast.maximumRainfall * 10) / 10 : undefined} mm ({todaysForecast?.rainProbabilityPercentage}%)
-
                             </div>
                         </td>
                         <td>
                         <div style={forecastStyle}>
-                                <sup style={forecastSupStyle}>{tomorrowsForecast?.deicticTime} &nbsp;</sup>
-                                {tomorrowsForecast?.minimumTemperature.toFixed(0)}°-{tomorrowsForecast?.maximumTemperature.toFixed(0)}°<br></br>
+                                <img src={toIconImageUrl(tomorrowsForecast ? tomorrowsForecast?.weatherIconName : "")} style={weatherIconStyle} />
+                                {tomorrowsForecast?.minimumTemperature.toFixed(0)}°-{tomorrowsForecast?.maximumTemperature.toFixed(0)}° <br/>
                                 {tomorrowsForecast ? Math.round(tomorrowsForecast.maximumRainfall * 10) / 10: undefined} mm ({tomorrowsForecast?.rainProbabilityPercentage}%)
                         </div>
                         </td>
@@ -80,5 +84,11 @@ function Weather2DaysForecasts()
         )
     }
 }
+
+function toIconImageUrl(iconName: string) : string
+{
+    return `https://beta.bom.gov.au/themes/custom/bom_theme/bom-react/dist/weather-icons/${iconName}.svg`;
+}
+
 
 export default Weather2DaysForecasts;

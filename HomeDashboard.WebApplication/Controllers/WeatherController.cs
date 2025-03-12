@@ -62,6 +62,7 @@ public class WeatherController
                     
                 return new GetWeatherForecastsResponseDto(
                     wf.DateTime, deicticTime, 
+                    wf.WeatherIconName,
                     wf.WeatherDescription, 
                     wf.RainProbabilityPercentage, wf.MinimumRainfall, wf.MaximumRainfall,
                     wf.MinimumTemperature, wf.MaximumTemperature);

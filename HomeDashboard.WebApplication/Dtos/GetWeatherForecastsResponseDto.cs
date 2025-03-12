@@ -11,6 +11,9 @@ public class GetWeatherForecastsResponseDto
     public string DeicticTime { get; set; }
     
     [Required]
+    public string WeatherIconName { get; set; }
+    
+    [Required]
     public string WeatherDescription { get; set; }
     
     [Required]
@@ -28,10 +31,11 @@ public class GetWeatherForecastsResponseDto
     [Required]
     public float MaximumTemperature { get; set; }
 
-    public GetWeatherForecastsResponseDto(DateTime dateTime, string deicticTime, string weatherDescription, float rainProbabilityPercentage, float minimumRainfall, float maximumRainfall, float minimumTemperature, float maximumTemperature)
+    public GetWeatherForecastsResponseDto(DateTime dateTime, string deicticTime, string weatherIconName, string weatherDescription, float rainProbabilityPercentage, float minimumRainfall, float maximumRainfall, float minimumTemperature, float maximumTemperature)
     {
         DateTime = dateTime;
         DeicticTime = deicticTime;
+        WeatherIconName = weatherIconName;
         WeatherDescription = weatherDescription;
         RainProbabilityPercentage = rainProbabilityPercentage;
         MinimumRainfall = minimumRainfall;
