@@ -44,10 +44,6 @@ function Weather2DaysForecasts()
     }
     else
     {
-        const tdStyle = {
-            fontSize: '2.5vw'
-        }
-
         const forecastStyle = {
             fontSize: '8vw'
         }
@@ -67,7 +63,7 @@ function Weather2DaysForecasts()
                             <div style={forecastStyle}>
                                 <sup style={forecastSupStyle}>{todaysForecast?.deicticTime} &nbsp;</sup>
                                 {todaysForecast?.minimumTemperature.toFixed(0)}°-{todaysForecast?.maximumTemperature.toFixed(0)}°<br></br>
-                                {Math.round(todaysForecast?.maximumRainfall * 10) / 10} mm ({todaysForecast?.rainProbabilityPercentage}%)
+                                {todaysForecast ? Math.round(todaysForecast.maximumRainfall * 10) / 10 : undefined} mm ({todaysForecast?.rainProbabilityPercentage}%)
 
                             </div>
                         </td>
@@ -75,7 +71,7 @@ function Weather2DaysForecasts()
                         <div style={forecastStyle}>
                                 <sup style={forecastSupStyle}>{tomorrowsForecast?.deicticTime} &nbsp;</sup>
                                 {tomorrowsForecast?.minimumTemperature.toFixed(0)}°-{tomorrowsForecast?.maximumTemperature.toFixed(0)}°<br></br>
-                                {Math.round(tomorrowsForecast?.maximumRainfall * 10) / 10} mm ({tomorrowsForecast?.rainProbabilityPercentage}%)
+                                {tomorrowsForecast ? Math.round(tomorrowsForecast.maximumRainfall * 10) / 10: undefined} mm ({tomorrowsForecast?.rainProbabilityPercentage}%)
                         </div>
                         </td>
                     </tr>
