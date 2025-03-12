@@ -12,7 +12,7 @@ function Clock()
     });
 
     const clockStyle = {
-        fontSize: '9vw'
+        fontSize: '8vw'
     }
     return(
         <div style={clockStyle}>

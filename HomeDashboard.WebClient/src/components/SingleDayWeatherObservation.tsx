@@ -40,7 +40,7 @@ function SingleDayWeatherObservation()
     else
     {
         const observationDivStyle = {
-            fontSize: '9vw'
+            fontSize: '8vw'
         }
 
         
