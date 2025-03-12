@@ -34,7 +34,7 @@ function NextBinCollection()
     else
     {
         const imgStyle = {
-            width: "12vw"
+            width: "4vw"
         }
 
         return (
